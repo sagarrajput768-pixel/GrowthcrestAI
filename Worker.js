@@ -54,7 +54,7 @@ export default {
       const aiResponse = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${env.OPENROUTER_API_KEY}`,
+          'Authorization': `Bearer ${env.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}`,
           'Content-Type': 'application/json',
           'HTTP-Referer': 'https://growthcrestai.com',
           'X-Title': 'GrowthCrest AI Chatbot'
