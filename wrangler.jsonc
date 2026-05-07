@@ -1,34 +1,18 @@
 {
-  "$schema": "./node_modules/wrangler/config-schema.json",
-  // Top-level configuration
-  "name": "my-worker",
-  "main": "src/index.js",
-  // Set this to today's date
+  "name": "growthcrestai-proxy",
+  "main": "Worker.js",
   "compatibility_date": "2026-05-07",
-  "workers_dev": false,
-  "route": {
-    "pattern": "example.org/*",
-    "zone_name": "example.org",
-  },
-  "kv_namespaces": [
-    {
-      "binding": "<MY_NAMESPACE>",
-      "id": "<KV_ID>",
-    },
-  ],
-  "env": {
-    "staging": {
-      "name": "my-worker-staging",
-      "route": {
-        "pattern": "staging.example.org/*",
-        "zone_name": "example.org",
-      },
-      "kv_namespaces": [
-        {
-          "binding": "<MY_NAMESPACE>",
-          "id": "<STAGING_KV_ID>",
-        },
-      ],
-    },
-  },
+  "workers_dev": true,
+
+  "vars": {
+    // "ANTHROPIC_API_KEY": "your-api-key-here"
+  }
+
+  // Optional for custom domain
+  // "routes": [
+  //   {
+  //     "pattern": "api.growthcrestai.com/*",
+  //     "zone_id": "your-zone-id"
+  //   }
+  // ]
 }
