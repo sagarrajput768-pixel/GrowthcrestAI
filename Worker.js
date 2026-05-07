@@ -1,11 +1,33 @@
+/**
+ * ============================================================
+ * GROWTHCRESTAI — Cloudflare Worker Proxy (OpenRouter Version)
+ * ============================================================
+ *
+ * HOW TO DEPLOY:
+ * 1. Go to https://workers.cloudflare.com → Create Worker
+ * 2. Delete all default code
+ * 3. Paste this entire file
+ * 4. Click "Save and Deploy"
+ *
+ * ADD YOUR OPENROUTER API KEY:
+ * Worker → Settings → Variables → Add Variable
+ *   Name:  OPENROUTER_API_KEY
+ *   Value: sk-or-v1-xxxxxxxxxxxxxxxx   ← your OpenRouter key
+ *   Toggle "Encrypt" ON → Save
+ *
+ * GET KEY: https://openrouter.ai/keys
+ * ============================================================
+ */
+
 export default {
   async fetch(request, env) {
 
-    // Allow requests from your WordPress site only
     const ALLOWED_ORIGINS = [
       'https://growthcrestai.com',
       'https://www.growthcrestai.com',
-      'http://localhost',       // for local testing
+      'http://growthcrestai.com',
+      'http://www.growthcrestai.com',
+      'http://localhost',
       'http://localhost:3000',
     ];
 
@@ -24,32 +46,33 @@ export default {
       });
     }
 
-    // Only allow POST
     if (request.method !== 'POST') {
       return new Response('Method not allowed', { status: 405 });
     }
 
-    // Only allow from your site
     if (!isAllowed) {
-      return new Response('Forbidden', { status: 403 });
+      return new Response(JSON.stringify({ error: 'Forbidden origin' }), {
+        status: 403,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
 
     try {
       const body = await request.json();
 
-      // Forward request to Anthropic API
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+      // OpenRouter API call
+      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': env.ANTHROPIC_API_KEY,
-          'anthropic-version': '2023-06-01',
+          'Authorization': `Bearer ${env.OPENROUTER_API_KEY}`,
+          'HTTP-Referer': 'https://growthcrestai.com',
+          'X-Title': 'GrowthCrestAI Assistant',
         },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 800,
-          system: body.system,
+          model: 'anthropic/claude-sonnet-4-5',
           messages: body.messages,
+          max_tokens: 800,
         }),
       });
 
@@ -58,7 +81,7 @@ export default {
       return new Response(JSON.stringify(data), {
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': origin,
+          'Access-Control-Allow-Origin': isAllowed ? origin : 'null',
         }
       });
 
