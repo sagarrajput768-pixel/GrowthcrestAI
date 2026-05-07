@@ -1,13 +1,14 @@
-name = "growthcrestai-openrouter"
-main = "worker.js"
+name = "growthcrestai-proxy"
+main = "Worker.js"
 compatibility_date = "2026-05-07"
 
+# Enable workers.dev deployment
 workers_dev = true
 
-# Optional but recommended for better runtime compatibility
-compatibility_flags = ["nodejs_compat"]
-
-# Do NOT put secrets here
+# Environment variables (DO NOT put real key here in production)
 [vars]
-# Example (non-sensitive only)
-SITE_URL = "https://growthcrestai.com"
+# ANTHROPIC_API_KEY = "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"
+
+# Optional: if you later bind a custom domain
+# route = "api.growthcrestai.com/*"
+# zone_id = "your-zone-id"
