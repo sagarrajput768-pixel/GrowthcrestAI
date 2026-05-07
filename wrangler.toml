@@ -1,25 +1,14 @@
-"$schema" = "./node_modules/wrangler/config-schema.json"
-name = "my-worker"
-main = "src/index.js"
-# Set this to today's date
+name = "growthcrestai-proxy"
+main = "Worker.js"
 compatibility_date = "2026-05-07"
-workers_dev = false
 
-[route]
-pattern = "example.org/*"
-zone_name = "example.org"
+# Enable workers.dev deployment
+workers_dev = true
 
-[[kv_namespaces]]
-binding = "<MY_NAMESPACE>"
-id = "<KV_ID>"
+# Environment variables (DO NOT put real key here in production)
+[vars]
+# ANTHROPIC_API_KEY = "your-api-key-here"
 
-[env.staging]
-name = "my-worker-staging"
-
-  [env.staging.route]
-  pattern = "staging.example.org/*"
-  zone_name = "example.org"
-
-  [[env.staging.kv_namespaces]]
-  binding = "<MY_NAMESPACE>"
-  id = "<STAGING_KV_ID>"
+# Optional: if you later bind a custom domain
+# route = "api.growthcrestai.com/*"
+# zone_id = "your-zone-id"
