@@ -5,8 +5,7 @@
   "workers_dev": true,
 
   "vars": {
-    // "ANTHROPIC_API_KEY": "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
-"
+    // "ANTHROPIC_API_KEY": "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"
   }
 
   // Optional for custom domain
