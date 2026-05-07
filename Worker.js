@@ -61,7 +61,7 @@ export default {
       const body = await request.json();
 
       // OpenRouter API call
-      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      const response = await fetch('https://growthcrestai-proxy.sagarrajput768.workers.dev/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
