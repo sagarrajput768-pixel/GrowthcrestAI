@@ -1,27 +1,3 @@
-/**
- * ============================================================
- * GROWTHCRESTAI — OPTION A: Cloudflare Worker Proxy
- * ============================================================
- *
- * HOW TO DEPLOY (free, takes ~5 minutes):
- * ────────────────────────────────────────
- * 1. Go to https://workers.cloudflare.com and sign up free
- * 2. Click "Create Worker"
- * 3. Delete all default code in the editor
- * 4. Paste THIS entire file into the editor
- * 5. Click "Save and Deploy"
- * 6. Copy your worker URL (looks like: https://your-name.workers.dev)
- * 7. Paste that URL into the WordPress widget file where it says:
- *    var PROXY_URL = 'https://your-name.workers.dev';
- *
- * SECURITY: Add your Anthropic API key in Cloudflare dashboard:
- *   Worker Settings → Variables → Add Variable
- *   Name: ANTHROPIC_API_KEY
- *   Value: sk-ant-xxxxxxxxxxxxxxxx
- *   Toggle "Encrypt" ON
- * ============================================================
- */
-
 export default {
   async fetch(request, env) {
 
