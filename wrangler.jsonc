@@ -1,13 +1,14 @@
-name = "growthcrestai-openrouter"
-main = "worker.js"
-compatibility_date = "2026-05-07"
+{
+  "name": "growthcrestai-openrouter",
+  "main": "worker.js",
+  "compatibility_date": "2026-05-07",
+  "workers_dev": true,
 
-workers_dev = true
+  "compatibility_flags": ["nodejs_compat"],
 
-# Optional but recommended for better runtime compatibility
-compatibility_flags = ["nodejs_compat"]
+  "vars": {
+    "SITE_URL": "https://growthcrestai.com"
+  }
 
-# Do NOT put secrets here
-[vars]
-# Example (non-sensitive only)
-SITE_URL = "https://growthcrestai.com"
+  // No API keys here — use secrets instead
+}
